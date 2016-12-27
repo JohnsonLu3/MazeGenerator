@@ -46,27 +46,27 @@ function index(x,y){
 }
 
 function removeWalls(a, b){
-  var x = a.i - b.i;
-  if (x === 1) {
-    a.Walls[3] = false;
-    b.Walls[1] = false;
-  } else if (x === -1) {
-    a.Walls[1] = false;
-    b.Walls[3] = false;
-  }
-  var y = a.j - b.j;
-  if (y === 1) {
-    a.Walls[0] = false;
-    b.Walls[2] = false;
-  } else if (y === -1) {
-    a.Walls[2] = false;
-    b.Walls[0] = false;
-  }
+	var x = a.i - b.i;
+	if(x >= 0){
+		a.Walls[0] = false;
+		b.Walls[2] = false;
+	}else if(x < 0){
+		a.Walls[2] = false;
+		b.Walls[0] = false;
+	}
+	var y = a.j - b.j;
+	if(y >= 0){
+		a.Walls[1] = false;
+		b.Walls[3] = false;
+	}else if(y < 0){
+		a.Walls[3] = false;
+		b.Walls[1] = false;
+	}
 }
 
 function Cell(x, y) {
-    var i = x * cellSize;
-    var j = y * cellSize;
+    this.i = x * cellSize;
+    this.j = y * cellSize;
     this.Walls = [true, true, true, true];
     this.visited = false;
 	this.current = false;
@@ -75,31 +75,31 @@ function Cell(x, y) {
         stroke(255, 255, 255);
         if (this.Walls[0] === true) {
             // top line
-            line(i, j, i + cellSize, j);
+            line(this.i, this.j, this.i + cellSize, this.j);
         }
         if (this.Walls[1] === true) {
             // right line
-            line(i + cellSize, j, i + cellSize, j + cellSize);
+            line(this.i + cellSize, this.j, this.i + cellSize, this.j + cellSize);
         }
         if (this.Walls[2] === true) {
             // bottom line
-            line(i, j + cellSize, i + cellSize, j + cellSize);
+            line(this.i, this.j + cellSize, this.i + cellSize, this.j + cellSize);
         }
         if (this.Walls[3] === true) {
             // left line
-            line(i, j, i, j + cellSize);
+            line(this.i, this.j, this.i, this.j + cellSize);
         }
 
 		if(this.current){
 			noStroke();
 			fill(85, 170, 85, 255);
-			rect(i,j,cellSize,cellSize);
+			rect(this.i,this.j,cellSize,cellSize);
 		}
 
         if(this.visited){
             noStroke();
             fill(20, 48, 84, 100);
-            rect(i, j, cellSize, cellSize);
+            rect(this.i, this.j, cellSize, cellSize);
         	this.current = false;
 		}
     }
@@ -113,19 +113,15 @@ function Cell(x, y) {
 		var left = grid[index(x - 1, y)];
 
 		if(top && !top.visited){
-			console.log("top");
 			Neighbors.push(top);
 		}
 		if(right && !right.visited){
-			console.log("right");
 			Neighbors.push(right);
 		}
 		if(bottom && !bottom.visited){
-			console.log("bottom");
 			Neighbors.push(bottom);
 		}
 		if(left && !left.visited){
-			console.log("left");
 			Neighbors.push(left);
 		}
 		if(Neighbors.length > 0) {
