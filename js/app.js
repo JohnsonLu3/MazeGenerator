@@ -8,12 +8,11 @@ var checked = [];
 var size = null;
 
 function setup() {
-	frameRate(60);
 	createCanvas(w, h);
 	cols = floor(w / cellSize);
 	rows = floor(h / cellSize);
 
-	background(25);
+	background(100,100,100);
 	for (var y = 0; y < floor(h / cellSize); y++) {
 		for (var x = 0; x < floor(w / cellSize); x++) {
 			var cell = new Cell(x, y);

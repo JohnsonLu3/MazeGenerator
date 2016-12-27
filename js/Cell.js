@@ -7,6 +7,7 @@ function Cell(x, y) {
 
 	this.show = function () {
 		stroke(255, 255, 255);
+		strokeWeight(3);
 		if (this.Walls[0] === true) {
 			// top line
 			line(this.i, this.j, this.i + cellSize, this.j);
@@ -26,13 +27,13 @@ function Cell(x, y) {
 
 		if (this.current) {
 			noStroke();
-			fill(85, 170, 85, 255);
+			fill(173, 225, 203);
 			rect(this.i, this.j, cellSize, cellSize);
 		}
 
 		if (this.visited) {
 			noStroke();
-			fill(20, 48, 84, 100);
+			fill(94, 142, 198, 25);
 			rect(this.i, this.j, cellSize, cellSize);
 			this.current = false;
 		}
