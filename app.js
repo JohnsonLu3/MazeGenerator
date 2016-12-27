@@ -27,7 +27,6 @@ function draw() {
     }
     currentCell.visited = true;
 	currentCell.current = true;
-	checked.push(currentCell);	// add current cell to list of visited cells
 	var next = currentCell.checkNeighbors();
 	if(next){
 		next.visit = true;
@@ -93,14 +92,13 @@ function Cell(x, y) {
 
 		if(this.current){
 			noStroke();
-			fill(0,255,0,100);
+			fill(85, 170, 85, 255);
 			rect(i,j,cellSize,cellSize);
 		}
 
         if(this.visited){
-            //fill(93, 165, 78, 100); head color
             noStroke();
-            fill(153, 72, 125, 100);
+            fill(20, 48, 84, 100);
             rect(i, j, cellSize, cellSize);
         	this.current = false;
 		}
